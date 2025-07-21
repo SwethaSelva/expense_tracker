@@ -1,0 +1,26 @@
+{
+  "name": "expense_tracker",
+  "version": "1.0.0",
+  "description": "Track the expense by upload your receipt or manually add it.",
+  "main": "server.ts",
+  "scripts": {
+    "start": "nodemon server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Swetha Selvakumaran",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.15",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "mongoose": "^8.16.4"
+  }
+}
