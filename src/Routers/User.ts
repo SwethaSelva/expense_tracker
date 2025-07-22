@@ -3,18 +3,23 @@ import Joi from 'joi';
 
 import { userController } from '../Controllers/User';
 import { validateBody } from '../../utils/Helper';
+import { EMAIL_REGEX } from '../../utils/Constants';
 
 const router = express.Router();
 
 const loginSchema = Joi.object({
-  email: Joi.string().required().pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
-  password: Joi.string().required().min(8),
+  email: Joi.string().required().pattern(EMAIL_REGEX).messages({
+    'string.pattern.base': 'Invalid email. Please enter proper email',
+    'any.required': 'Email is required'
+  }),
+  password: Joi.string().required().min(8).messages({
+    'string:password': 'Please enter at least {#limit} character long password',
+    'any.required': 'Password cannot be empty!'
+  }),
 });
 
-const registerSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required().pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
-  password: Joi.string().required().min(8),
+const registerSchema = loginSchema.keys({
+  name: Joi.string().required()
 });
 
 router.post('/v1/register', validateBody(registerSchema), userController.register);
