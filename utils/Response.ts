@@ -1,13 +1,21 @@
-import { ResponseSchema } from '../src/Interface/Common';
 
-export class ResponseClass {
-  data: Object | null
-  message: String
-  statusCode: Number
+export class SuccessReponse {
+  data: object | null
+  message: string
+  statusCode: number
 
-  constructor (response: ResponseSchema) {
+  constructor (response: SuccessReponse) {
     this.data = response.data || null,
     this.message = response.message || '',
-    this.statusCode = response.statusCode || 200
+    this.statusCode = response.statusCode
+  }
+}
+
+export class AppError extends Error {
+  statusCode: number
+
+  constructor (response: AppError) {
+    super(response.message);
+    this.statusCode = response.statusCode;
   }
 }

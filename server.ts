@@ -6,6 +6,7 @@ import cors from 'cors';
 import { MONGO_URI, PORT } from './utils/Constants';
 import { ServerConnectErr } from './src/Interface/Common';
 import { userRouter } from './src/Routers';
+import { errorHandler } from "./utils/ErrorHandler";
 
 require('dotenv').config();
 
@@ -28,6 +29,9 @@ app.use(cors());
 
 // Routers
 app.use("/api/user", userRouter);
+
+// Error Handler
+app.use(errorHandler);
 
 // MongoDB Setup
 mongoose.Promise = global.Promise;

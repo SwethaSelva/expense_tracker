@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import authenticate from '../../utils/Authenticate';
 import userServices from '../Services/User';
-import { ResponseClass } from '../../utils/Response';
+import { SuccessReponse, AppError } from '../../utils/Response';
 import { UserSchema } from '../Interface/User';
 
 const login = async function (req: Request, res: Response) {
@@ -18,16 +18,17 @@ const login = async function (req: Request, res: Response) {
 
   // not - throw error
   if (!isValidPassword) {
-    res.json(new ResponseClass({
+    throw new AppError({
+      name: 'client side Error',
       statusCode: 403,
       message: 'Password Incorrect. Please check your password.'
-    }));
+    });
   }
 
   // match - create access and send (success, token)
   let accessToken = await insertToken(user);
 
-  res.json(new ResponseClass({
+  res.json(new SuccessReponse({
     data: { accessToken },
     statusCode: 200,
     message: 'Login Successful!'
@@ -44,20 +45,38 @@ const insertToken = async function (user: UserSchema) {
 
 const register = async function (req: Request, res: Response) {
   let { name, email, password } = req.body;
+  try {
+    let passwordHash = await authenticate.hashedPassword(password);
 
-  let passwordHash = await authenticate.hashedPassword(password);
+    let user = await userServices.addOne({
+      name, email, password_hash: passwordHash,
+    });
 
-  let user = await userServices.addOne({
-    name, email, password_hash: passwordHash,
-  });
+    let accessToken = await insertToken(user);
 
-  let accessToken = await insertToken(user);
+    res.json(new SuccessReponse({
+      data: { accessToken },
+      statusCode: 200,
+      message: 'Registation Successful!'
+    }));
 
-  res.json(new ResponseClass({
-    data: { accessToken },
-    statusCode: 200,
-    message: 'Registation Successful!'
-  }))
+  } catch (err: any) {
+    console.log({ err })
+    if (err.code === 11000 && err.keyPattern?.email) {
+      throw new AppError({
+        name: 'Conflict',
+        statusCode: 409,
+        message: 'Email already exists'
+      });
+    }
+
+    // fallback error
+    throw new AppError({
+      name: 'Unknown error',
+      statusCode: 500,
+      message: 'Something went wrong'
+    });
+  }
 };
 
 export const userController = {
