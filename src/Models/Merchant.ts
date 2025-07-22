@@ -27,4 +27,4 @@ const merchantSchema = new mongoose.Schema({
   }
 });
 
-export const merchant = mongoose.model('merchant', merchantSchema);
+export const Merchant = mongoose.model('merchant', merchantSchema);
