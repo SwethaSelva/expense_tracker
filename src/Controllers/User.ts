@@ -50,8 +50,8 @@ const register = async function (req: Request, res: Response) {
   let user = await userServices.addOne({
     name, email, password_hash: passwordHash,
   });
-  
-  let accessToken = insertToken(user);
+
+  let accessToken = await insertToken(user);
 
   res.json(new ResponseClass({
     data: { accessToken },

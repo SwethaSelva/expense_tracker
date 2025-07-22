@@ -3,13 +3,6 @@ interface ServerConnectErr extends Error {
   status?: number;
 }
 
-interface ResponseSchema {
-  data?: object | null,
-  message?: String,
-  statusCode?: Number
-}
-
 export {
   ServerConnectErr,
-  ResponseSchema
 }

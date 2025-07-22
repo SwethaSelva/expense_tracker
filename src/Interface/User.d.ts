@@ -4,7 +4,7 @@ export interface UserSchema {
   name: string,
   email: string,
   password_hash: string,
-  access_token?: string,
+  access_token?: string | null,
   expense_ids?: Array<SchemaTypes.ObjectId | string>,
   receipt_ids?: Array<SchemaTypes.ObjectId | string>,
   created_at?: Date,

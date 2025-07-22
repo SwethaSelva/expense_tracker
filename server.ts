@@ -5,7 +5,9 @@ import cors from 'cors';
 
 import { MONGO_URI, PORT } from './utils/Constants';
 import { ServerConnectErr } from './src/Interface/Common';
-import { userRouter } from './src/Router';
+import { userRouter } from './src/Routers';
+
+require('dotenv').config();
 
 // Server Setup
 const app = express();

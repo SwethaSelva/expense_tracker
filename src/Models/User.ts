@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
   },
   access_token: {
     type: String,
-    required: true,
   },
   expense_ids: [{
     type: SchemaTypes.ObjectId,
