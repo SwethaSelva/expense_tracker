@@ -1,19 +1,19 @@
-import { item } from './item';
-import { user } from './user';
-import { expense  } from './expense';
-import { receipt } from './receipt';
-import { category } from './categories';
-import { budget } from './budgets';
-import { recurring_transaction } from './recurringTransaction';
-import { merchant } from './merchant';
+import { Item } from './Item';
+import { User } from './User';
+import { Expense  } from './Expense';
+import { Receipt } from './Receipt';
+import { Category } from './Categories';
+import { Budget } from './Budgets';
+import { Recurring_transaction } from './RecurringTransaction';
+import { Merchant } from './Merchant';
 
-module.exports = {
-    user,
-    item,
-    expense,
-    receipt,
-    category,
-    budget,
-    recurringTransaction: recurring_transaction,
-    merchant,
+export {
+    User,
+    Item,
+    Expense,
+    Receipt,
+    Category,
+    Budget,
+    Recurring_transaction,
+    Merchant,
 };

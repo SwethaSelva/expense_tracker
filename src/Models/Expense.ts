@@ -73,4 +73,4 @@ const expenseSchema = new mongoose.Schema({
   }
 });
 
-export const expense = mongoose.model('expense', expenseSchema);
+export const Expense = mongoose.model('expense', expenseSchema);

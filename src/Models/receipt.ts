@@ -31,4 +31,4 @@ const receiptSchema = new mongoose.Schema({
   }
 });
 
-export const receipt = mongoose.model('receipt', receiptSchema);
+export const Receipt = mongoose.model('receipt', receiptSchema);

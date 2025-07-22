@@ -28,4 +28,4 @@ const categorySchema = new mongoose.Schema({
   }
 });
 
-export const category = mongoose.model('category', categorySchema);
+export const Category = mongoose.model('category', categorySchema);
