@@ -4,7 +4,9 @@
   "description": "Track the expense by upload your receipt or manually add it.",
   "main": "server.ts",
   "scripts": {
-    "start": "nodemon server.ts",
+    "dev": "nodemon server.ts",
+    "build": "tsc",
+    "prod": "node ./dist/server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Swetha Selvakumaran",
