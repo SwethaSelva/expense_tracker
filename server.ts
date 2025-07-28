@@ -3,13 +3,15 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import cors from 'cors';
 
-import { MONGO_URI, PORT } from './utils/Constants';
+import { PORT } from './utils/Constants';
 import { ServerConnectErr } from './src/Interface/Common';
 import { userRouter } from './src/Routers';
 import { errorHandler } from "./utils/ErrorHandler";
+import { checkJsonContentType } from './utils/Helper';
 
 require('dotenv').config();
 
+let MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost/expense-tracker';
 // Server Setup
 const app = express();
 app.listen(PORT, () => {
@@ -26,6 +28,7 @@ app.listen(PORT, () => {
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(checkJsonContentType);
 
 // Routers
 app.use("/api/user", userRouter);

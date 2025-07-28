@@ -9,6 +9,10 @@ const receiptSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  merchant: {
+    type: SchemaTypes.ObjectId,
+    ref: 'merchant'
+  },
   expense_id: {
     type: SchemaTypes.ObjectId,
     ref: 'expense'

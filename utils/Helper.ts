@@ -8,3 +8,12 @@ export function validateBody(schema: ObjectSchema) {
     next();
   };
 }
+
+// Middleware to check content type
+export const checkJsonContentType = (req: Request, res: Response, next: NextFunction) => {
+  const contentType = req.headers['content-type'];
+  if (req.method !== 'GET' && contentType !== 'application/json') {
+    return res.status(415).json({ message: 'Unsupported Media Type. Use application/json.' });
+  }
+  next();
+};
